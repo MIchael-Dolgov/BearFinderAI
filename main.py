@@ -19,8 +19,7 @@ def upload():
         return "Изображение не выбрано", 400
     
     else:
-        filename = secure_filename(pic.filename)
-        mimetype = pic.mimetype
+        return "Загружено"
 
 
 if __name__ == "__main__":
