@@ -1,0 +1,18 @@
+@import '~mdb-ui-kit/css/mdb.min.css';
+
+* {
+    font-family: 'Mulish', sans-serif;
+}
+.brand-name {
+    font-size: 5rem;
+    position: center;
+}
+
+.navbar-dark {
+    background-color: #1d349e;
+}
+
+.bg-image {
+    background-image: url(bgPhotos/bears.png);
+    height: 100vh;
+}
