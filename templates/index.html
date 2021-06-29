@@ -23,11 +23,15 @@
             <div class="text-white">
               <h1 class="mb-3 brand-name">BearFinderAI</h1>
               <h4 class="mb-4">Поиск полярных медведей на снимках с помощью искусственного интеллекта</h4>
-              <form method="POST" action="/results">
-                <input name="downloadimg" type="file" id="upload" hidden />
+              <form method="POST" action="http://127.0.0.1:5000/upload"
+               enctype = "multipart/form-data">
+                <input name="image" type="file" id="upload" hidden />
                 <label class="btn btn-outline-light btn-lg"for="upload">
                   Загрузить фотографию
                 </span>
+                </label>
+                <br> </br>
+                <input value='Обработать' type="submit" class="btn btn-outline-light btn-lg">
               </form>
             </div>
           </div>
