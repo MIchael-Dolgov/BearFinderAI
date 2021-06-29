@@ -1,9 +1,0 @@
-@import '~mdb-ui-kit/css/mdb.min.css';
-
-* {
-    font-family: 'Mulish', sans-serif;
-}
-.bg-image {
-    background-image: url(images/bears.png);
-    height: 100vh;
-}
