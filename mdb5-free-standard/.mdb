@@ -1,9 +1,0 @@
-{
-  "packageManager": "npm",
-  "hash": "2ca736d2",
-  "projectName": "mdb5-free-standard",
-  "meta": {
-    "starter": "mdb5-free-standard",
-    "type": "frontend"
-  }
-}
