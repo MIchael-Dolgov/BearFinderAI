@@ -13,6 +13,7 @@ ALLOWED_EXTENSIONS = set(["jpg", "jpeg"])
 
 
 def allowed_file(filename):
+    """Проверяет расширение файла"""
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
@@ -23,7 +24,7 @@ def mainpage() -> "html":
 
 
 @app.route("/upload", methods=["POST", "GET"])
-def upload_file():
+def upload_file() -> "html":
 
     """Смотрит имя файла и выводит соответствующий ответ"""
 
@@ -40,9 +41,8 @@ def upload_file():
             temp_path = os.path.join(TEMP_IMAGES_FOLDER, "{}".format(filename))
             file.save(temp_path)
             ready_path = os.path.join(UPLOAD_FOLDER, "{}".format(filename))
-
+            #функция с opecv обрабатывает и сохраняет изображение
             anotatePhoto(temp_path, ready_path)
-
             return render_template("upload.html",
                            the_photo = "static/Ready_Images/{}".format(filename))
 
@@ -51,7 +51,7 @@ def upload_file():
 
 
 @app.route("/download")
-def download_file():
+def download_file() -> "file":
     """Загружает текущий файл из папки"""
     p = "static/Ready_Images/{}".format(filename)
     return send_file(p, as_attachment=True)
