@@ -13,13 +13,6 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-#def timer():
-#    for i in range(10):
-#        text = "Выберите другое раширение файла. Вы будете перенаправлены через: 5 секунд"
-#        time.sleep(5)
-#    return render_template(redirect("/")), 
-
-
 @app.route("/")
 @app.route("/main")
 def mainpage() -> "html":
@@ -65,31 +58,6 @@ def info_page() -> "html":
 @app.route("/notchoised")
 def second_info_page() -> "html":
     return render_template("second_info.html")
-    
-
-#def upload():
-    #"""Принимает картинку"""
-    #pic = request.files["image"]
-    
-    #if not pic:
-    #    return "Изображение не выбрано", 400
-    
-    #Настроить проверку формата файла
-    #Реализовать модуль time
-    #elif allowed_file(pic) == False:
-    #    return "Неверное расширение файла"
-
-    #else:
-    #    img = Image.open(pic)
-    #    img.save("static/Images/pic.JPG")
-    #    return render_template("upload.html",
-    #                          the_photo = "static/Images/pic.JPG")
-
-
-#@app.route("/Images/pic.JPEG")
-#def image():
-#    return render_template("upload.html",
-#                           the_photo = "Images/pic.JPEG")
 
 
 if __name__ == "__main__":

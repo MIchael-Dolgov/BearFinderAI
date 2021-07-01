@@ -16,3 +16,8 @@
     background-image: url(bgPhotos/bears.png);
     height: 100vh;
 }
+
+.bg-image2 {
+    background-image: url(bgPhotos/black-concrete-wall.jpg);
+    height: 100vh;
+}
