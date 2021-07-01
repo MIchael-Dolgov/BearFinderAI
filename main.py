@@ -1,15 +1,24 @@
 import os
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
-from PIL import Image
+import time
+
 
 app = Flask(__name__)
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+UPLOAD_FOLDER = "static/Images"
+ALLOWED_EXTENSIONS = set(["jpg", "jpeg"])
 
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+#def timer():
+#    for i in range(10):
+#        text = "Выберите другое раширение файла. Вы будете перенаправлены через: 5 секунд"
+#        time.sleep(5)
+#    return render_template(redirect("/")), 
 
 
 @app.route("/")
@@ -19,25 +28,39 @@ def mainpage() -> "html":
 
 
 @app.route("/upload", methods=["POST", "GET"])
-def upload():
-    """Принимает картинку"""
-    pic = request.files["image"]
+def upload_file():
 
-    if not pic:
-        return "Изображение не выбрано", 400
+    if request.method == "POST":
+        file = request.files["image"]
+
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(UPLOAD_FOLDER, "{}".format(filename)))
+            return render_template("upload.html",
+                           the_photo = "static/Images/{}".format(filename))
+
+        else:
+            return redirect("/")
+
+
+
+#def upload():
+    #"""Принимает картинку"""
+    #pic = request.files["image"]
+    
+    #if not pic:
+    #    return "Изображение не выбрано", 400
     
     #Настроить проверку формата файла
-    #elif allowed_file(pic) != True:
-    #   
-    #   return redirect()
+    #Реализовать модуль time
+    #elif allowed_file(pic) == False:
+    #    return "Неверное расширение файла"
 
-    #сохранить файлы в определённой папке
-    else:
-        img = Image.open(pic)
-        img.save("static/Images/pic.JPEG")
-
-    return render_template("upload.html",
-                           the_photo = "static/Images/pic.JPEG")
+    #else:
+    #    img = Image.open(pic)
+    #    img.save("static/Images/pic.JPG")
+    #    return render_template("upload.html",
+    #                          the_photo = "static/Images/pic.JPG")
 
 
 #@app.route("/Images/pic.JPEG")
