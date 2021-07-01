@@ -1,11 +1,14 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory, send_file
 from werkzeug.utils import secure_filename
+from bearsAnotate import anotatePhoto
 
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = "static/Images"
+TEMP_IMAGES_FOLDER = "static/Images"
+UPLOAD_FOLDER = "static/Ready_Images"
+
 ALLOWED_EXTENSIONS = set(["jpg", "jpeg"])
 
 
@@ -34,9 +37,14 @@ def upload_file():
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(UPLOAD_FOLDER, "{}".format(filename)))
+            temp_path = os.path.join(TEMP_IMAGES_FOLDER, "{}".format(filename))
+            file.save(temp_path)
+            ready_path = os.path.join(UPLOAD_FOLDER, "{}".format(filename))
+
+            anotatePhoto(temp_path, ready_path)
+
             return render_template("upload.html",
-                           the_photo = "static/Images/{}".format(filename))
+                           the_photo = "static/Ready_Images/{}".format(filename))
 
         else:
             return redirect("/info")
