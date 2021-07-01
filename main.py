@@ -53,7 +53,7 @@ def upload_file():
 @app.route("/download")
 def download_file():
     """Загружает текущий файл из папки"""
-    p = "static/Images/{}".format(filename)
+    p = "static/Ready_Images/{}".format(filename)
     return send_file(p, as_attachment=True)
 
 

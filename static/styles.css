@@ -3,11 +3,6 @@
 * {
     font-family: 'Mulish', sans-serif;
 }
-.brand-name {
-    font-size: 5rem;
-    position: center;
-}
-
 .navbar-dark {
     background-color: #1d349e;
 }
@@ -16,8 +11,16 @@
     background-image: url(bgPhotos/bears.png);
     height: 100vh;
 }
+a {
+    color: white;
+    text-decoration: none;
+}
+.result-image {
+    width: 70%;
+    height: 70%;
+    border-radius: 10px;
+}
 
-.bg-image2 {
-    background-image: url(bgPhotos/black-concrete-wall.jpg);
-    height: 100vh;
+.download-text {
+    font-size: 50px;
 }
