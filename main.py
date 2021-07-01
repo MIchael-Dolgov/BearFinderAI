@@ -1,7 +1,6 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory, send_file
 from werkzeug.utils import secure_filename
-import time
 
 
 app = Flask(__name__)
@@ -30,8 +29,15 @@ def mainpage() -> "html":
 @app.route("/upload", methods=["POST", "GET"])
 def upload_file():
 
+    """Смотрит имя файла и выводит соответствующий ответ"""
+
+    global filename
+
     if request.method == "POST":
         file = request.files["image"]
+
+        if not file:
+            return redirect("/notchoised")
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
@@ -40,9 +46,26 @@ def upload_file():
                            the_photo = "static/Images/{}".format(filename))
 
         else:
-            return redirect("/")
+            return redirect("/info")
 
 
+@app.route("/download")
+def download_file():
+    """Загружает текущий файл из папки"""
+    p = "static/Images/{}".format(filename)
+    return send_file(p, as_attachment=True)
+
+
+
+@app.route("/info")
+def info_page() -> "html":
+    return render_template("info.html")
+
+
+@app.route("/notchoised")
+def second_info_page() -> "html":
+    return render_template("second_info.html")
+    
 
 #def upload():
     #"""Принимает картинку"""
