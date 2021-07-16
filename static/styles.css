@@ -11,13 +11,19 @@
     background-image: url(bgPhotos/bears.png);
     height: 100vh;
 }
+
+.bg-image2 {
+    background-image: url(bgPhotos/backforest.jpeg);
+    height: 100vh;
+}
+
 a {
     color: white;
     text-decoration: none;
 }
 .result-image {
-    width: 57%;
-    height: 80%;
+    width: 75%;
+    height: 75%;
     border-radius: 10px;
 }
 
